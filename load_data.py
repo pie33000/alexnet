@@ -3,9 +3,6 @@ import torchvision.transforms as T
 from torch.utils.data import DataLoader
 from torchvision.datasets import ImageNet
 
-from model import AlexNet
-
-model = AlexNet()
 
 # -------------------- 1 / common constants --------------------
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
@@ -60,3 +57,21 @@ def load_data(batch_size=128, num_workers=8, root="/path/to/imagenet"):
     )
 
     return train_loader, val_loader
+
+
+def load_test_data(batch_size=128, num_workers=8, root="/path/to/imagenet"):
+    test_transform = T.Compose(
+        [
+            T.Resize(256),
+            T.TenCrop(224),  # 5 crops + 5 flips
+            T.Lambda(
+                lambda crops: torch.stack(
+                    [T.Normalize(IMAGENET_MEAN, IMAGENET_STD)(T.ToTensor()(c)) for c in crops]
+                )
+            ),  # (10, 3, 224, 224)
+        ]
+    )
+    test_set = ImageNet(root=root, split="test", transform=test_transform)
+    test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=True)
+
+    return test_loader

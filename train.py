@@ -70,6 +70,8 @@ def train_model(
                 correct += (preds == labels).sum().item()
 
         print(f"Epoch {epoch + 1}, Top-1 accuracy: {100 * correct / total:.2f}%")
+        with open(f"{save_dir}/top1_accuracy.txt", "a") as f:
+            f.write(f"{epoch + 1}, {100 * correct / total:.2f}%\n")
         if epoch % 10 == 0:
             torch.save(model.state_dict(), f"{save_dir}/model_{epoch}.pth")
 
