@@ -5,10 +5,6 @@ license: mit
 ## 1. Introduction
 This repository contains a **from-scratch PyTorch implementation of AlexNet** trained on the ImageNet-1K dataset. It reproduces the classic 2012 network with modern training utilities such as data augmentation, learning-rate warm-up, and cosine/step decay scheduling.
 
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/AlexNet.svg" width="550"/>
-</p>
-
 ## 2. Project Structure
 ```
 ├── model.py          # AlexNet architecture (5 conv + 3 fc)
