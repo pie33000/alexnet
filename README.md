@@ -14,16 +14,6 @@ This repository contains a **from-scratch PyTorch implementation of AlexNet** tr
 └── README.md         # You are here
 ```
 
-### `model.py`
-* **Features block** – 5 convolutional layers:
-  1. 96 × \(11\times11\) conv, stride 4  
-  2. 256 × \(5\times5\) conv, padding 2  
-  3. 384 × \(3\times3\) conv, padding 1  
-  4. 384 × \(3\times3\) conv, padding 1  
-  5. 256 × \(3\times3\) conv, padding 1  
-* **Classifier** – flatten → 4096 → 4096 → 1000 with ReLU and Dropout.
-* Optional Kaiming/Xavier weight initialisation via `--init_weights`.
-
 ### `load_data.py`
 * **Training augmentations** – resize shorter side to 256 px → random 224-px crop → horizontal flip.
 * **Validation augmentations** – resize 256 px → **TenCrop(224)** (5 crops + mirror) → normalisation.
